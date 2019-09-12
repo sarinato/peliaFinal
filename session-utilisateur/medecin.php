@@ -199,8 +199,10 @@ include("verificationLogin.php");
 										$('#adresseMed').addClass("true-validate");
 									}
 									if(data.success==1){
-										alert ("success");
+										window.location.href = "./ListeMedecin.php"
+
 									}
+
 								}
 								});									
 						});

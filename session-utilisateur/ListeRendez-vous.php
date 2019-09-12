@@ -135,10 +135,10 @@ $controle = $controles->fetchAll(PDO::FETCH_ASSOC);
                                                     <div style=" padding-bottom: 0;padding-top: 0;" class=" card-header header">	
                                                         <div class="NomMed Margin pic prof">
 															<h3 class="NomdeR"><?php echo $key['nom_conntroles']; ?></h3>
-																<div class="mt-4">
+																<div  class=" suppButton">
 																	<form action="modification.php" method="POST">
 																		<input type="text" style="display:none" name="IDRendez" value="<?php echo $key['id_conntroles']; ?>">
-																		<button type="submit" name="suprimerRendez"class="" style="background:none; border:none;"><img class="supp" src="img/delete.svg" width="4%" alt=""></button>
+																		<button type="submit" name="suprimerRendez"class="" style="background:none; border:none;"><img style="margin-bottom:-18%;" class="supp" src="img/delete.svg" width="4%" alt=""></button>
 																	</form>
 																</div>
 
@@ -195,6 +195,12 @@ $controle = $controles->fetchAll(PDO::FETCH_ASSOC);
                                                                             <input type="text" name="timeRendez" data-toggle="timepicker" class="form-input" autocomplete="off" value="<?php echo $key['heure_conntroles']; ?>">
                                                                         </div>
                                                                     </div>
+																	<!-- modifier verssion final: ajouter l'input de changement du temps du rappel -->
+																	<div class="search-form medecin ">
+																			<img  src="img/alarm.svg" width="7%" alt="">
+																			<input type="text" name="timeControle" data-toggle="timepicker" class="form-input" autocomplete="off" value="<?php echo $key['rappel_conntroles']; ?>">
+																			<span class="Margin pic  spanRndv"><?php echo $key['rappel_text']; ?></span>
+																		</div>
 				
 																	<div class="search-form medecin ">
                                                                         <img src="img/adresse.svg" width="7%" alt="">

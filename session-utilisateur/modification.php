@@ -22,8 +22,7 @@
                 'idTemps' => $_POST["IDTemps"]
 
         ));
-        
-    
+
  }
 
 

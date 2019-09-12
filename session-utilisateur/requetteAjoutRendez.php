@@ -4,10 +4,50 @@
     session_start();
     require("connect.php");
     $id_user = $_SESSION['id'];
-    $id_medecin = $_POST['medecinSelected'];
     
-        if (isset($_POST['ajoutControle'])){
-            print_r($_POST);
+    $dataResult = array();
+    $error = false;
+    
+            $nom_conntroles=$_POST['nomRend'];
+            $date_conntroles=$_POST['dateRendez'];
+            $heure_conntroles=$_POST['timeRendez'];
+            $rappel_conntroles=$_POST['heureRappel'];
+            $emplacement=$_POST['LocMed'];
+            $remarque=$_POST['RemarqueMed'];
+
+            if(empty($nom_conntroles)){
+                $dataResult["nom_conntroles"] = 1;
+                $error = true;
+            }
+            if(empty($date_conntroles)){
+                $dataResult["date_conntroles"] = 1;
+                $error = true;
+            }
+            // if(empty($nom_conntroles)){
+            //     $dataResult["nom_conntroles"] = 1;
+            //     $error = true;
+            // }
+            if(empty($heure_conntroles)){
+                $dataResult["heure_conntroles"] = 1;
+                $error = true;
+            }
+            if(empty($rappel_conntroles)){
+                $dataResult["rappel_conntroles"] = 1;
+                $error = true;
+            }
+            if(empty($emplacement)){
+                $dataResult["emplacement"] = 1;
+                $error = true;
+            }
+            if(empty($remarque)){
+                $dataResult["remarque"] = 1;
+                $error = true;
+            }
+    
+    
+        if ($error == false){
+            $dataResult['success'] = 1;
+            $id_medecin = $_POST['medecinSelected'];            
             $nom_conntroles=$_POST['nomRend'];
             $date_conntroles=$_POST['dateRendez'];
             $heure_conntroles=$_POST['timeRendez'];
@@ -47,16 +87,12 @@
                     'emplacement' => $emplacement,
                     'remarque' => $remarque,
                     'rappel_heure'=>$rappel_heure
-            ))){
-                echo "hello word";
+            ))){            
             }else{
-                echo "khawartiha al9owad";
+                echo "None";
             }
     
         }
-
-
-
-    
+        echo json_encode($dataResult);
 
 ?>

@@ -1,26 +1,64 @@
 
 (function ($) {
     "use strict";
-
+    // The script for the time input in the "rendez vous page"
+    $(document).click(function(){
+        if($("#timeRendez").val() != ""){
+            $("#timeRendez").parent().removeClass('alert-validate');
+            $("#timeRendez").parent().addClass('true-validate');
+        }
+        else{
+            $("#timeRendez").parent().removeClass('true-validate');
+            $("#timeRendez").parent().addClass('alert-validate');
+        }
+        $(".frequence").each(function(){
+            if($(this).val() != "" ){
+                $(this).parent().removeClass('alert-validate');
+                $(this).parent().addClass('true-validate');
+            }
+            else{
+                $(this).parent().removeClass('true-validate');
+                $(this).parent().addClass('alert-validate');
+            }
+        })
+    })
+    
+        // $(".SelectMed").each(function(){
+        //     if($(this).is(':checked')){
+        //         alert("Hello");
+        //     }
+        // })
+    
     
     /*==================================================================
     [ Focus Contact2 ]*/
     $('.input100').each(function(){
         $(this).on('blur', function(){
+
             if($(this).val().trim() != "") {
                 $(this).addClass('has-val');
             }
             else {
                 $(this).removeClass('has-val');
             }
-        })    
+        })
+       
+        
+            
     })
 
 
     /*==================================================================
     [ Validate after type ]*/
+    
+    
+    //    setInterval(function(){
+    //        console.log($("#heure").val());
+    //    },3000)
     $('.validate-input .input100').each(function(){
+ 
         $(this).on('blur', function(){
+ 
             if(validate(this) == false){
                 showValidate(this);                
                 $('.validate-input').each(function(){
@@ -38,8 +76,10 @@
                     }      						           							
                     
                 });	
-            }                      
-        })    
+            } 
+                              
+        }) 
+
     })
 
     /*==================================================================

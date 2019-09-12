@@ -1,5 +1,23 @@
+<?php
+require("../session-utilisateur/connect.php");
+$id_details_article = (isset($_GET['article'])) ? $_GET['article'] : 0;
+
+$articles = $bdd->prepare("SELECT * FROM contenue_article
+             INNER JOIN details_article 
+                ON details_article.id_details_article = contenue_article.id_details_article");
+$articles->execute();
+
+$article = $articles->fetchAll(PDO::FETCH_ASSOC);
+function dateToFrench( $format, $date) {
+    $english_days = array('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday');
+    $french_days = array('lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi', 'dimanche');
+    $english_months = array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December');
+    $french_months = array('janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre');
+    return str_replace($english_months, $french_months, str_replace($english_days, $french_days, date($format, strtotime($date) ) ) );
+}
+?>
 <!doctype html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <!-- Required meta tags -->
@@ -16,6 +34,7 @@
     <link rel="stylesheet" href="vendors/owl-carousel/owl.carousel.min.css">
     <link rel="stylesheet" href="vendors/nice-select/css/nice-select.css">
     <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
     <link href="js/lib/ionicons/css/ionicons.min.css" rel="stylesheet">
@@ -30,53 +49,12 @@
 
 <body>
 
-    <!--================ Start Header Area =================-->
-    <header class="header_area">
-        <div class="main_menu">
-            <nav class="navbar navbar-expand-lg navbar-light">
-                <div class="container">
-                    <!-- Brand and toggle get grouped for better mobile display -->
-                    <a class="navbar-brand logo_h" href="index.php">Pélia</a>
-                    <a class="navbar-brand logo_inner_page" href="index.php"><img src="img/logo2.png" alt=""></a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <!-- Collect the nav links, forms, and other content for toggling -->
-                    <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
-                        <ul class="nav navbar-nav menu_nav">
-                            <li class="nav-item active"><a class="nav-link" href="index.php">acceuil</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#apropos">A propos</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#service">Services</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#pricing">Tarifs</a></li>
-                            <li class="nav-item dropdown">
-                                <a href="#team" class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Médicaments</a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                    <a class="dropdown-item" href="recherche.php">Chercher un Médicament</a>
-                                    <a class="dropdown-item" href="actualité.php">Articles/Vidéos</a>
-
-                                </div>
-                            </li>
-                            <!-- <li class="nav-item submenu dropdown">
-								<a href="#faq" class="nav-link">faq</a>
-							</li> -->
-                            <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-                        </ul>
-                        <ul class="nav inscrire navbar-nav navbar-right">
-                            <li class="section-btn"><a href="../PeliaForm-master/index.php">Inscrire</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-        </div>
-    </header>
-    <!--================ End Header Area =================-->
+<?php 
+   include "nav.php"
+   ?>
 
     <!--================ Start Home Banner Area =================-->
-    <section id="home" class="homee" data-stellar-background-ratio="0.5">
-        <div class="overlayyy"></div>
+    <!-- <section id="home" class="homee" data-stellar-background-ratio="0.5">
         <div class="container">
             <div class="row">
 
@@ -90,194 +68,91 @@
 
             </div>
         </div>
-    </section>
+    </section> -->
     <!--================ End Home Banner Area =================-->
     <!--================Blog Area =================-->
-    <section class="blog_area blog_categorie_area list-wrapper">
+    <section style="padding-top:10%" class="blog_area blog_categorie_area list-wrapper">
         <div class="container">
             <div class="row ">
-                <div class="col-lg-10 ">
+                <div class="col-lg-8 ">
                     <div class="blog_left_sidebar">
-                        <article class="row blog_item list-item">
-                            <div class="col-md-3">
-                                <div class="blog_info text-right">
-                                    <ul class="blog_meta list">
-                                        <li><a href="#">Pélia<i class="lnr lnr-user"></i></a></li>
-                                        <li><a href="#">12 Dec, 2019<i class="lnr lnr-calendar-full"></i></a></li>
-                                        <li><a href="#">1.2M Views<i class="lnr lnr-eye"></i></a></li>
-                                        <li><a href="#">06 Comments<i class="lnr lnr-bubble"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="col-md-9">
-                                <div class="blog_post">
-                                    <img src="img/pill.jpg" width="100%" alt="">
-                                    <div class="blog_details">
-                                        <a href="single-blog.html">
-                                            <h2>Le quart des patients âgés polymédiqués risque des interactions médicamenteuses</h2>
-                                        </a>
-                                        <p>Une étude conduite pendant deux ans sur un millier d’ordonnances de personnes âgées de plus de 65 ans et polymédiquées a livré ses résultats. Cette étude menée par le laboratoire Teva en partenariat avec le service Icar de l’hôpital de la Pitié Salpêtrière, a montré notamment que 85 % des patients âgés prennent et préparent seuls leurs médicaments. Et un patient sur 3 dit ne pas savoir pourquoi lui sont prescrits ses médicaments. De fait, 45 % des patients disent avoir déjà oublié de prendre leurs médicaments au bon moment. Et le même pourcentage de patients indiquent n’avoir pas pris leur traitement car ils avaient l’impression que celui-ci faisait plus de mal que de bien. En étudiant leurs ordonnances, il s’avère que 83 % des patients étaient exposés à au moins une prescription potentiellement inappropriées. La moitié des patients sont exposés à au moins 2 prescriptions inappropriées. Le quart (27 %) des patients sont potentiellement exposés à au moins une interaction médicamenteuse majeure.</p>
-                                        <a href="more.php" class="blog_btn">View More</a>
+                    <div  class="pages wow animated activate ">
+                        <?php  
+                        foreach($article as $this_article){
+                            ?>
+                        <article class="row blog_item">
+                            <div class="container col-md-9">
+                                
+                                <h2 class="h2"><?php  echo $this_article['title_article'] ?></h2>
+                                <div class="col-lg-12 plas">
+                                    <div class="blog_info text-right">
+                                        <ul class="blog_meta list">
+                                            <li><i class="lnr lnr-user"></i><a href="#">Pélia</a></li>
+                                            <li><i class="lnr lnr-calendar-full"></i><a href="#"><?php echo dateToFrench("j F, o", $this_article['date_modification']); ?></a></li>
+                                            <li><i class="lnr lnr-eye"></i><a href="#"><?php echo $this_article['view'];  ?> Views</a></li>
+                                        </ul>
                                     </div>
                                 </div>
-                            </div>
-                        </article>
-                        <article class="row blog_item list-item">
-                            <div class="col-md-3">
-                                <div class="blog_info text-right">
-                                    <ul class="blog_meta list">
-                                        <li><a href="#">Pélia<i class="lnr lnr-user"></i></a></li>
-                                        <li><a href="#">12 Dec, 2019<i class="lnr lnr-calendar-full"></i></a></li>
-                                        <li><a href="#">1.2M Views<i class="lnr lnr-eye"></i></a></li>
-                                        <li><a href="#">06 Comments<i class="lnr lnr-bubble"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="col-md-9">
-                                <div class="blog_post">
-                                    <img src="img/pill.jpg" width="100%" alt="">
-                                    <div class="blog_details">
-                                        <a href="single-blog.html">
-                                            <h2>Le quart des patients âgés polymédiqués risque des interactions médicamenteuses</h2>
-                                        </a>
-                                        <p>Une étude conduite pendant deux ans sur un millier d’ordonnances de personnes âgées de plus de 65 ans et polymédiquées a livré ses résultats. Cette étude menée par le laboratoire Teva en partenariat avec le service Icar de l’hôpital de la Pitié Salpêtrière, a montré notamment que 85 % des patients âgés prennent et préparent seuls leurs médicaments. Et un patient sur 3 dit ne pas savoir pourquoi lui sont prescrits ses médicaments. De fait, 45 % des patients disent avoir déjà oublié de prendre leurs médicaments au bon moment. Et le même pourcentage de patients indiquent n’avoir pas pris leur traitement car ils avaient l’impression que celui-ci faisait plus de mal que de bien. En étudiant leurs ordonnances, il s’avère que 83 % des patients étaient exposés à au moins une prescription potentiellement inappropriées. La moitié des patients sont exposés à au moins 2 prescriptions inappropriées. Le quart (27 %) des patients sont potentiellement exposés à au moins une interaction médicamenteuse majeure.</p>
-                                        <a href="more.php" class="blog_btn">View More</a>
+                                 
+                                <div class="feature-img container">
+                                        <img class="" width="100%" src="img/pill.jpg" alt="">
                                     </div>
+                                    <div class=" col-md-12  blog_details">
+                                    <p class="excert">
+                                    <?php  echo $this_article['description_article'] ?>
+                                    </p>
+                                    <a href="more.php?article=<?php  echo $this_article['id_details_article'] ?>" class="blog_btn">Lire la suite</a>
                                 </div>
                             </div>
+                               
+                                
                         </article>
-                        <article class="row blog_item list-item">
-                            <div class="col-md-3">
-                                <div class="blog_info text-right">
-                                    <ul class="blog_meta list">
-                                        <li><a href="#">Pélia<i class="lnr lnr-user"></i></a></li>
-                                        <li><a href="#">12 Dec, 2019<i class="lnr lnr-calendar-full"></i></a></li>
-                                        <li><a href="#">1.2M Views<i class="lnr lnr-eye"></i></a></li>
-                                        <li><a href="#">06 Comments<i class="lnr lnr-bubble"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="col-md-9">
-                                <div class="blog_post">
-                                    <img src="img/medicament-500.jpg" width="100%" alt="">
-                                    <div class="blog_details">
-                                        <a href="single-blog.html">
-                                            <h2>Le quart des patients âgés polymédiqués risque des interactions médicamenteuses</h2>
-                                        </a>
-                                        <p>Une étude conduite pendant deux ans sur un millier d’ordonnances de personnes âgées de plus de 65 ans et polymédiquées a livré ses résultats. Cette étude menée par le laboratoire Teva en partenariat avec le service Icar de l’hôpital de la Pitié Salpêtrière, a montré notamment que 85 % des patients âgés prennent et préparent seuls leurs médicaments. Et un patient sur 3 dit ne pas savoir pourquoi lui sont prescrits ses médicaments. De fait, 45 % des patients disent avoir déjà oublié de prendre leurs médicaments au bon moment. Et le même pourcentage de patients indiquent n’avoir pas pris leur traitement car ils avaient l’impression que celui-ci faisait plus de mal que de bien. En étudiant leurs ordonnances, il s’avère que 83 % des patients étaient exposés à au moins une prescription potentiellement inappropriées. La moitié des patients sont exposés à au moins 2 prescriptions inappropriées. Le quart (27 %) des patients sont potentiellement exposés à au moins une interaction médicamenteuse majeure.</p>
-                                        <a href="single-blog.html" class="blog_btn">View More</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </article>
-                        <article class="row blog_item list-item">
-                            <div class="col-md-3">
-                                <div class="blog_info text-right">
-                                    <ul class="blog_meta list">
-                                        <li><a href="#">Pélia<i class="lnr lnr-user"></i></a></li>
-                                        <li><a href="#">12 Dec, 2019<i class="lnr lnr-calendar-full"></i></a></li>
-                                        <li><a href="#">1.2M Views<i class="lnr lnr-eye"></i></a></li>
-                                        <li><a href="#">06 Comments<i class="lnr lnr-bubble"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="col-md-9">
-                                <div class="blog_post">
-                                    <img src="img/medicament-500.jpg" width="100%" alt="">
-                                    <div class="blog_details">
-                                        <a href="single-blog.html">
-                                            <h2>Le quart des patients âgés polymédiqués risque des interactions médicamenteuses</h2>
-                                        </a>
-                                        <p>Une étude conduite pendant deux ans sur un millier d’ordonnances de personnes âgées de plus de 65 ans et polymédiquées a livré ses résultats. Cette étude menée par le laboratoire Teva en partenariat avec le service Icar de l’hôpital de la Pitié Salpêtrière, a montré notamment que 85 % des patients âgés prennent et préparent seuls leurs médicaments. Et un patient sur 3 dit ne pas savoir pourquoi lui sont prescrits ses médicaments. De fait, 45 % des patients disent avoir déjà oublié de prendre leurs médicaments au bon moment. Et le même pourcentage de patients indiquent n’avoir pas pris leur traitement car ils avaient l’impression que celui-ci faisait plus de mal que de bien. En étudiant leurs ordonnances, il s’avère que 83 % des patients étaient exposés à au moins une prescription potentiellement inappropriées. La moitié des patients sont exposés à au moins 2 prescriptions inappropriées. Le quart (27 %) des patients sont potentiellement exposés à au moins une interaction médicamenteuse majeure.</p>
-                                        <a href="single-blog.html" class="blog_btn">View More</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </article>
-                        <article class="row blog_item list-item">
-                            <div class="col-md-3">
-                                <div class="blog_info text-right">
-                                    <ul class="blog_meta list">
-                                        <li><a href="#">Pélia<i class="lnr lnr-user"></i></a></li>
-                                        <li><a href="#">12 Dec, 2019<i class="lnr lnr-calendar-full"></i></a></li>
-                                        <li><a href="#">1.2M Views<i class="lnr lnr-eye"></i></a></li>
-                                        <li><a href="#">06 Comments<i class="lnr lnr-bubble"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="col-md-9">
-                                <div class="blog_post">
-                                    <img src="img/medicament-500.jpg" width="100%" alt="">
-                                    <div class="blog_details">
-                                        <a href="single-blog.html">
-                                            <h2>Le quart des patients âgés polymédiqués risque des interactions médicamenteuses</h2>
-                                        </a>
-                                        <p>Une étude conduite pendant deux ans sur un millier d’ordonnances de personnes âgées de plus de 65 ans et polymédiquées a livré ses résultats. Cette étude menée par le laboratoire Teva en partenariat avec le service Icar de l’hôpital de la Pitié Salpêtrière, a montré notamment que 85 % des patients âgés prennent et préparent seuls leurs médicaments. Et un patient sur 3 dit ne pas savoir pourquoi lui sont prescrits ses médicaments. De fait, 45 % des patients disent avoir déjà oublié de prendre leurs médicaments au bon moment. Et le même pourcentage de patients indiquent n’avoir pas pris leur traitement car ils avaient l’impression que celui-ci faisait plus de mal que de bien. En étudiant leurs ordonnances, il s’avère que 83 % des patients étaient exposés à au moins une prescription potentiellement inappropriées. La moitié des patients sont exposés à au moins 2 prescriptions inappropriées. Le quart (27 %) des patients sont potentiellement exposés à au moins une interaction médicamenteuse majeure.</p>
-                                        <a href="single-blog.html" class="blog_btn">View More</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </article>
+                            <?php
+                        }
+                        ?>
+                        
+                        </div>   
                        
+                        <nav class="blog-pagination justify-content-center d-flex">
+                                <ul class="pagination">
+                                    <li class="page-item">
+                                        <a href="#" class="page-link" aria-label="Previous">
+                                            <span aria-hidden="true">
+                                                <span class="lnr lnr-chevron-left"></span>
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li class="page-item"><a href="#" class="page-link">01</a></li>
+                                    <li class="page-item "><a href="#" class="page-link">02</a></li>
+                                    <li class="page-item"><a href="#" class="page-link">03</a></li>
+                                    <li class="page-item"><a href="#" class="page-link">04</a></li>
+                                    <li class="page-item"><a href="#" class="page-link">09</a></li>
+                                    <li class="page-item">
+                                        <a href="#" class="page-link nxt" aria-label="Next">
+                                            <span aria-hidden="true">
+                                                <span class="lnr lnr-chevron-right"></span>
+                                            </span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </nav>
                     </div>
                 </div>
+                <?php
+    include("aside.php");
+               ?>
             </div>
+            
         </div>
+        
     </section>
-    <div class="holder">
-</div>
+    
 
 
     <!--================Footer Area =================-->
-    <footer class="footer_area ">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-12">
-                    <div class="footer_top flex-column">
-                        <div class="footer_logo">
-                            <a href="index.php"><span class="logo-footer">Pélia</span></a>
-                            <div class="d-lg-block d-none">
-                                <nav style="background:transparent !important;" class="navbar navbar-expand-lg navbar-light justify-content-center">
-                                    <div class="collapse navbar-collapse offset">
-                                        <ul class="nav navbar-nav menu_nav mx-auto">
-                                            <li class="nav-item"><a class="nav-link text-white" href="index.php">acceuil</a></li>
-                                            <li class="nav-item"><a class="nav-link text-white" href="#apropos">A
-													propos</a></li>
-                                            <li class="nav-item"><a class="nav-link text-white" href="#service">services</a></li>
-                                            <li class="nav-item"><a class="nav-link text-white" href="#team">l'équipe</a>
-                                            </li>
-                                            <li class="nav-item"><a class="nav-link text-white" href="#pricing">Tarifs</a></li>
-                                        </ul>
-                                        <ul id="flex" class="nav navbar-nav navbar-right">
-                                            <li class="section-btn"><a href="../PeliaForm-master/index.php">Inscrire</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </nav>
-                            </div>
-                        </div>
-                        <div class="footer_social mt-lg-0 mt-4">
-                            <a href="#"><i class="fab fa-facebook-f"></i></a>
-                            <a href="#"><i class="fab fa-twitter"></i></a>
-                            <a href="#"><i class="fab fa-skype"></i></a>
-                            <a href="#"><i class="fab fa-pinterest-p"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row footer_bottom justify-content-center">
-                <p class="col-lg-8 col-sm-12 footer-text">
-                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                    Copyright &copy;
-                    <script>
-                        document.write(new Date().getFullYear());
-                    </script>
-                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                </p>
-            </div>
-        </div>
-    </footer>
-    <!--================End Footer Area =================-->
+    <?php 
+                include "footer.php"
+                ?>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -287,29 +162,38 @@
     <script src="js/wow.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/main.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
     <script src="js/theme.js"></script>
-    <script>
-    var items = $(".list-wrapper .list-item");
-	var numItems = items.length;
-	var perPage = 4;
+    <script src="js/pagination.js"></script>
+    <script type="text/javascript">
 
-	items.slice(perPage).hide();
+$('#submit_email').click(function(e){
+    e.preventDefault();						
+    var form = $("#newsletter")[0];
+    var formdata = new FormData(form);
+    $.ajax({
+        type:'POST',																	
+        url: "./ajoutEmail.php",
+        cache:false,
+        data: formdata,
+        dataType: "json",
+        processData: false,
+        contentType: false,
+        success:function (data){
+            if (data.email == "200") {
+            }
+            if(data.success == "1"){
+                $("#inlineFormInputGroup").val(" ");
+                $(".desabonner").text("vous pouvez désormais recevoir des email sur chaque nouveau article déposer sir le site");
+              
+            }	
+                                                                                                
+        }
+        });									
+});
 
-	$('#pagination-container').pagination({
-		items: numItems,
-		itemsOnPage: perPage,
-		prevText: "&laquo;",
-		nextText: "&raquo;",
-		onPageClick: function (pageNumber) {
-			var showFrom = perPage * (pageNumber - 1);
-			var showTo = showFrom + perPage;
-			items.hide().slice(showFrom, showTo).show();
-		}
-	});
-    </script>
+</script>
 </body>
 
 </html>

@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="vendors/linericon/style.css">
     <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/themify-icons.css">
+    <link rel="stylesheet" href="vendors/fontawesome/css/all.min.css">
     <link rel="stylesheet" href="css/magnific-popup.css">
     <link rel="stylesheet" href="vendors/owl-carousel/owl.carousel.min.css">
     <link rel="stylesheet" href="vendors/lightbox/simpleLightbox.css">
@@ -82,13 +84,13 @@
 
 <body>
 
-    <!--================ Start Header Area =================-->
-    <header class="header_area">
+     <!--================ Start Header Area =================-->
+ <header class="header_area">
         <div class="main_menu">
             <nav class="navbar navbar-expand-lg navbar-light">
                 <div class="container">
                     <!-- Brand and toggle get grouped for better mobile display -->
-                    <a class="navbar-brand logo_h" href="index.php">Pélia</a>
+                    <a class="navbar-brand logo_h" href="index.php">Pelia</a>
                     <a class="navbar-brand logo_inner_page" href="index.php"><img src="img/logo2.png" alt=""></a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="icon-bar"></span>
@@ -97,26 +99,27 @@
                     </button>
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
-                        <ul style="margin-left:18% !important" class="nav navbar-nav menu_nav">
-                            <li class="nav-item active"><a class="nav-link" href="index.php">acceuil</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#apropos">A propos</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#service">Services</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#pricing">Tarifs</a></li>
-                            <li class="nav-item dropdown">
-                                <a href="#team" class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Médicaments</a>
+                    <ul class="nav navbar-nav menu_nav">
+                            <li class="nav-item dropdown"><a style="font-size:17px" href="#team" class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pelia</a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                    <a class="dropdown-item" href="recherche.php">Chercher un Médicament</a>
-                                    <a class="dropdown-item" href="actualité.php">Articles/Vidéos</a>
+                                <a class="dropdown-item" href="#apropos">Qui sommes-nous</a>
+                                    <a class="dropdown-item" href="index.php#service">Services</a>
+                                    <a class="dropdown-item" href="index.php#pricing">Tarifs</a>
+                                    <a class="dropdown-item" href="index.php#team">L'équipe</a>
+                                    <a class="dropdown-item" href="index.php#faq">FAQ</a>
 
                                 </div>
-                            </li>
+                                </li>
+                                <li class="nav-item active"><a class="nav-link" href="recherche.php">Médicament</a></li>
+                                <li class="nav-item active"><a class="nav-link" href="actualité.php">Articles</a></li>
+
                             <!-- <li class="nav-item submenu dropdown">
 								<a href="#faq" class="nav-link">faq</a>
 							</li> -->
-                            <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                            <li class="nav-item"><a class="nav-link" href="index.php#contact">Contact</a></li>
                         </ul>
                         <ul class="nav inscrire navbar-nav navbar-right">
-                            <li class="section-btn"><a href="../PeliaForm-master/index.php">Inscrire</a>
+                            <li class="section-btn"><a href="../PeliaForm-master/index.php">S'inscrire/S'identifier</a>
                             </li>
                         </ul>
                     </div>
@@ -133,9 +136,11 @@
         <div id="home" class="swiper-container">
 
             <div class="swiper-wrapper">
+            
                 <div class="swiper-slide" style="background-image:url('img/DoctorBanner.jpg');background-size:cover">
+                <div class="overlayyy"></div>
+
                     <div class="container">
-                        <div class="overlayyy"></div>
                         <div class="row">
 
                             <div class="col-md-6 col-sm-12">
@@ -160,7 +165,7 @@
                     </div>
                 </div>
 
-                <div class="swiper-slide" style="background:url('img/pill.jpg');background-size:cover;background-position:center center;">
+                <div class="swiper-slide" style="background:url('img/backk.svg');background-size:cover;background-position:center center;">
                     <div class="container">
                         <div class="overlayyy"></div>
                         <div class="row">
@@ -178,7 +183,7 @@
                     </div>
 				</div>
 				
-				<div class="swiper-slide" style="background:url('img/pill.jpg');background-size:cover;background-position:center center;">
+				<div class="swiper-slide" style="background:url('img/backk.svg');background-size:cover;background-position:center center;">
                     <div class="container">
                         <div class="overlayyy"></div>
                         <div class="row">
@@ -378,6 +383,24 @@
                             <a href="#" class="primary_btn2 mt-35">Learn More</a>
                         </div>
                     </div>
+
+                    <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+                        <div class="service_item">
+                            <img src="img/services/chercher.png" alt="">
+                            <h4>Renseigner sur un médicament</h4>
+                            <p>Fruit saw for brought fish forth had ave is man a that their Two he is dominion evening their Fruit saw for brought fish forth</p>
+                            <a href="#" class="primary_btn2 mt-35">Learn More</a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+                        <div class="service_item">
+                            <img src="img/services/smartphone.png" alt="">
+                            <h4>se renseigner sur votre maladie</h4>
+                            <p>Fruit saw for brought fish forth had ave is man a that their Two he is dominion evening their Fruit saw for brought fish forth</p>
+                            <a href="#" class="primary_btn2 mt-35">Learn More</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -408,9 +431,9 @@
             <div class="container">
 
                 <div class="section-header">
-                    <h3 class="section-title">Tarifs</h3>
+                    <h3 class="section-title">Tarifs (SMS)</h3>
                     <span class="section-divider"></span>
-                    <p class="section-description">Suivant vos besoins, nous vous proposons plusieurs types de Rappel:</p>
+                    <p class="section-description">Suivant vos besoins, nous vous proposons plusieurs types de Rappel (SMS):</p>
                 </div>
 
                 <div class="row">
@@ -419,7 +442,7 @@
                         <div class="box woww bounceInLeft animated">
                             <h3>90 Rappels</h3>
                             <h4><sup>DH </sup>100<span> mois</span></h4>
-                            <a href="../payment" class="get-started-btn">Commencer</a>
+                            <a href="#" class="get-started-btn">Commencer</a>
                         </div>
                     </div>
 
@@ -428,7 +451,7 @@
                             <h3>270 Rappels</h3>
                             <h4><sup>DH </sup>150<span> mois</span></h4>
 
-                            <a href="../payment" class="get-started-btn">Commencer</a>
+                            <a href="#" class="get-started-btn">Commencer</a>
                         </div>
                     </div>
 
@@ -437,11 +460,53 @@
                             <h3>600 Rappel</h3>
                             <h4><sup>DH</sup>250<span> mois</span></h4>
                             <div>
-                                <a id="demo01" href="../payment" class="get-started-btn">Commencer</a>
+                                <a id="demo01" href="#animatedModal" class="get-started-btn">Commencer</a>
 
                             </div>
                         </div>
                     </div>
+
+                    
+
+                </div>
+
+                <div class="section-header">
+                    <h3 class="section-title">Tarifs (Appel vocal)</h3>
+                    <span class="section-divider"></span>
+                    <p class="section-description">Suivant vos besoins, nous vous proposons plusieurs types de Rappel (Vocal):</p>
+                </div>
+
+                <div class="row">
+
+                    <div class="col-lg-4 col-md-6">
+                        <div class="box woww bounceInLeft animated">
+                            <h3>90 Rappels</h3>
+                            <h4><sup>DH </sup>150<span> mois</span></h4>
+                            <a href="#" class="get-started-btn">Commencer</a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6">
+                        <div class="box featured woww bounceInUp animated">
+                            <h3>270 Rappels</h3>
+                            <h4><sup>DH </sup>200<span> mois</span></h4>
+
+                            <a href="#" class="get-started-btn">Commencer</a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6">
+                        <div class="box woww bounceInRight animated">
+                            <h3>600 Rappel</h3>
+                            <h4><sup>DH</sup>350<span> mois</span></h4>
+                            <div>
+                                <a id="demo01" href="#animatedModal" class="get-started-btn">Commencer</a>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    
 
                 </div>
             </div>
@@ -493,7 +558,7 @@
                     <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque</p>
                 </div>
 
-                <div style="position:relative;left:15%;" class="row">
+                <div  class="row">
 
                     <div class=" col-md-3 woww bounceInLeft animated">
                         <div class="member">
@@ -537,6 +602,24 @@
                             <div class="member-info">
                                 <div class="member-info-content">
                                     <h4>EL FILALI Abderrahman</h4>
+                                    <span>CTO</span>
+                                    <div class="social">
+                                        <a href=""><i class="fa fa-twitter"></i></a>
+                                        <a href=""><i class="fa fa-facebook"></i></a>
+                                        <a href=""><i class="fa fa-google-plus"></i></a>
+                                        <a href=""><i class="fa fa-linkedin"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class=" col-md-3 woww bounceInRight animated" data-wow-delay="0.2s">
+                        <div class="member">
+                            <img src="img/team-4.jpg" class="img-fluid" alt="">
+                            <div class="member-info">
+                                <div class="member-info-content">
+                                    <h4>Fouzia Balibla</h4>
                                     <span>CTO</span>
                                     <div class="social">
                                         <a href=""><i class="fa fa-twitter"></i></a>
@@ -636,7 +719,7 @@
 
         <div class="wrap-contact100">
 
-            <form class="contact100-form validate-form" action="index.php" method="post">
+            <form class="contact100-form validate-form" id="mailSendingForm">
                 <span class="contact100-form-title woww bounceIn animated">
 				Contactez-nous
 			</span>
@@ -660,79 +743,26 @@
                 </div>
 
                 <div class="container-contact100-form-btn">
-                    <button class="contact100-form-btn" name="submit">
+                    <button class="contact100-form-btn" id="mailSending" type="submit" name="mailSending">
                         <span>
 						Envoyer
 						<i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
 					</span>
                     </button>
                 </div>
+                <div style="display:none;" id="succesMessage">
+                    <p>l'émail à était bien envoyer on vous répondont dés que c'est possible </p>
+                </div>
+                <div style="display:none;" id="erreurMessage">
+                    <p>malheureusement votre mail n'a pas était envoyer réssayer plus tard </p>
+                </div>
             </form>
 
         </div>
-        <?php
-            if(isset($_POST['submit'])){
-                $nom =$_POST['name'];
-                $email=$_POST['email'];
-                $email = str_replace(' ', '', $email);
-                $message=$_POST['message'];
-                $message = $message .". L'email est envoyer par " . $email ;
-                    if(mail("ahmedkhachia17@gmail.com" ,$message,$nom)){    
-                    }
-				}
-    ?>
-            <?php 
-
-	?>
-                <!--================Footer Area =================-->
-                <footer class="footer_area">
-                    <div class="container">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-12">
-                                <div class="footer_top flex-column">
-                                    <div class="footer_logo">
-                                        <a href="index.php"><span class="logo-footer">Pélia</span></a>
-                                        <div class="d-lg-block d-none">
-                                            <nav style="background:transparent !important;" class="navbar navbar-expand-lg navbar-light justify-content-center">
-                                                <div class="collapse navbar-collapse offset">
-                                                    <ul class="nav navbar-nav menu_nav mx-auto">
-                                                        <li class="nav-item"><a class="nav-link text-white" href="index.php">acceuil</a></li>
-                                                        <li class="nav-item"><a class="nav-link text-white" href="#apropos">A
-													propos</a></li>
-                                                        <li class="nav-item"><a class="nav-link text-white" href="#service">services</a></li>
-                                                        <li class="nav-item"><a class="nav-link text-white" href="#team">l'équipe</a>
-                                                        </li>
-                                                        <li class="nav-item"><a class="nav-link text-white" href="#pricing">Tarifs</a></li>
-                                                    </ul>
-                                                    <ul id="flex" class="nav navbar-nav navbar-right">
-                                                        <li class="section-btn"><a href="../PeliaForm-master/index.php">Inscrire</a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </nav>
-                                        </div>
-                                    </div>
-                                    <div class="footer_social mt-lg-0 mt-4">
-                                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                                        <a href="#"><i class="fab fa-twitter"></i></a>
-                                        <a href="#"><i class="fab fa-skype"></i></a>
-                                        <a href="#"><i class="fab fa-pinterest-p"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row footer_bottom justify-content-center">
-                            <p class="col-lg-8 col-sm-12 footer-text">
-                                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                                Copyright &copy;
-                                <script>
-                                    document.write(new Date().getFullYear());
-                                </script>
-                                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                            </p>
-                        </div>
-                    </div>
-                </footer>
+       
+                <?php 
+                include "footer.php"
+                ?>
     </div>
     <!--================End Footer Area =================-->
 
@@ -816,6 +846,35 @@
             },
         });
     </script>
+    <script type="text/javascript">
+
+$('#mailSending').click(function(e){
+    e.preventDefault();						
+    var form = $("#mailSendingForm")[0];
+    var formdata = new FormData(form);
+    $.ajax({
+        type:'POST',																	
+        url: "./mailSending.php",
+        cache:false,
+        data: formdata,
+        dataType: "json",
+        processData: false,
+        contentType: false,
+        success:function (data){
+            if (data.email == "200"){
+
+            }
+            if(data.success == "1"){
+                $("#succesMessage").css("display","block");
+            }	
+            if(data.success == "0"){
+                $("#erreurMessage").css("display","block");
+            }	                                                                                    
+        }
+        });									
+});
+
+</script>
 </body>
 
 </html>

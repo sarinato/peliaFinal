@@ -36,16 +36,25 @@
 							<li class="nav-item"><a class="nav-link" href="medecin.php">Ajouter médecin</a></li>
 
 						</ul>
-						</li>
+					</li>
 					<li class="nav-item submenu dropdown">
 						<a class="nav-link dropdown-toggle" href="rendez-vous.php" data-toggle="dropdown" role="button" aria-haspopup="true"
 						 aria-expanded="false"><img src="img/header/date.png" alt="">Rendez vous</a>
 						 <ul class="dropdown-menu">
-							<li class="nav-item"><a class="nav-link" href="ListeRendez-vous.php">Liste Rendez-vous</a></li>
+							<li class="nav-item"><a class="nav-link" href="ListeRendez-vousNot.php">Liste Rendez-vous</a></li>
 							<li class="nav-item"><a class="nav-link" href="rendez-vous.php">Ajouter Rendez-vous</a></li>
 
 						</ul>
-						</li>
+					</li>
+					<li class="nav-item submenu dropdown">
+						<a class="nav-link dropdown-toggle" href="rendez-vous.php" data-toggle="dropdown" role="button" aria-haspopup="true"
+						 aria-expanded="false"><img src="img/header/date.png" alt="">Traitement</a>
+						 <ul class="dropdown-menu">
+							<li class="nav-item"><a class="nav-link" href="survey.php">Qestionnaire</a></li>
+							<li class="nav-item"><a class="nav-link" href="observance.php">Observence</a></li>
+
+						</ul>
+					</li>
 					<li class="nav-item"><a class="nav-link" href="about-us.php"><img src="img/header/about.png" alt=""><span style="position:relative;right:2%;font-size:11px;">Qui sommes-nous</span></a></li>
 					<li class="nav-item"><a class="nav-link" href="faq.php"><img src="img/header/faq.png" alt="">FAQ</a></li>
 					<li class="nav-item"><a class="nav-link" href="contact.php"><img src="img/header/contact.png" alt="">Contact</a></li>

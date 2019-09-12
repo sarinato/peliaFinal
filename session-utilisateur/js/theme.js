@@ -12,8 +12,8 @@
     $(".fitscreen").css("height", fitscreen);
     var nav_offset_top = $('header').height() + 50;
     /*-------------------------------------------------------------------------------
-	  Navbar 
-	-------------------------------------------------------------------------------*/
+      Navbar 
+    -------------------------------------------------------------------------------*/
 
     //* Navbar Fixed  
     function navbarFixed() {
@@ -116,52 +116,83 @@
 
     // set CHEQUED to the value of input if chequed //
 
-  
-     
+
+
     // set attribute chequed to the every day input //
 
     $('.chequed-default input[type=checkbox]').prop('checked', false);
-    $('#anId1').prop('checked', true).attr("disabled",true);
-    $('#permanant').prop('checked', true).attr("disabled",true);
+    $('#anId1').prop('checked', true).attr("disabled", true);
+    $('#permanant').prop('checked', true).attr("disabled", true);
     // changedAbdo
-    $('input').on('change', function() {
-        if($('#anId1').is(':checked')){
+    $('input').on('change', function () {
+        if ($('#anId1').is(':checked')) {
             $('#anId1_seleted').prop('checked', true);
-            $('#typeJour').attr("value","all");
+            $('#typeJour').attr("value", "all");
         }
-        
+
+        if ($('#quotidien_modif').is(':checked')) {
+            $('#quotidien_seleted_modif').prop('checked', true);
+        }
+        if ($('#specifier_modif').is(':checked')) {
+            $('#specifier_seleted_modif').prop('checked', true);
+        }
+        if ($('#interval_modif').is(':checked')) {
+            $('#interval_seleted_modif').prop('checked', true);
+        }
+
     });
     // verifier si une input checkbox est chequer et déchequer les autres  //
 
-    $('input.frequenceInput').on('change', function() {
-        $('input.frequenceInput').not(this).prop('checked', false);  
+    $('input.frequenceInput').on('change', function () {
+        $('input.frequenceInput').not(this).prop('checked', false);
     });
-    
-    $('.one-choice.planifier input[type=checkbox]').on('change', function() {
-        $('.one-choice.planifier input[type=checkbox]').not(this).prop('checked', false);  
-        $('#anId1').attr("disabled",true);
-    
+
+    $('.one-choice.planifier input[type=checkbox]').on('change', function () {
+        $('.one-choice.planifier input[type=checkbox]').not(this).prop('checked', false);
+        $('#anId1').attr("disabled", true);
+
     });
     // fDay Script changedAbdo
     $(".frequenceJourn").on("click", function () {
         $("#fDay").val($(this).val());
     });
-    
-    $('.one-choice.planifier input[type=checkbox]').on('change', function() {
-        $('.one-choice.planifier input[type=checkbox]').not(this).prop('checked', false);  
-        $('#anId1').attr("disabled",true);
+
+    $('.one-choice.planifier input[type=checkbox]').on('change', function () {
+        $('.one-choice.planifier input[type=checkbox]').not(this).prop('checked', false);
+        $('#anId1').attr("disabled", true);
         // if($('#anId1').prop("disabled",true);)
         // $('#typeJour').attr("value","all");
         // $('#anId1_selected').attr('value', '');
         // $('#anId2_selected').attr('value', '');
         // $('#anId3_selected').attr('value', '');
-    
-    });
-    $('.one-choice.duree input[type=checkbox]').on('change', function() {
-        $('.one-choice.duree input[type=checkbox]').not(this).prop('checked', false);  
-        $('#permanant').attr("disabled",true);
-        $('#limiter_seleted').attr('value', '');
 
+    });
+    $('.one-choice.duree input[type=checkbox]').on('change', function () {
+        $('.one-choice.duree input[type=checkbox]').not(this).prop('checked', false);
+        $('#permanant').attr("disabled", true);
+        $('#limiter_seleted').attr('value', '');
+    });
+    // verifier si une input checkbox est chequer et déchequer les autres modification des jours de prises  //
+
+    $('.JoursModification input[type=checkbox]').on('change', function () {
+        $('.JoursModification input[type=checkbox]').not(this).prop('checked', false);
+        $('.JoursModification input[type=checkbox]').prop('disabled', false);
+        $(this).prop('disabled', true);
+
+    });
+    $('.JoursModificat form > input[type=checkbox]').on('change', function () {
+        $('.JoursModificat form > input[type=checkbox]').not(this).prop('checked', false);
+        $('.JoursModificat form > input[type=checkbox]').prop('disabled', false);
+        $(this).prop('disabled', true);
+        if ($('#quotidien_modif').is(':checked')) {
+            $('#quotidien_seleted_modif').prop('checked', true);
+        }
+        if ($('#specifier_modif').is(':checked')) {
+            $('#specifier_seleted_modif').prop('checked', true);
+        }
+        if ($('#interval_modif').is(':checked')) {
+            $('#interval_seleted_modif').prop('checked', true);
+        }
     });
     // /////////////
     /*----------------------------------------------------*/
@@ -192,7 +223,7 @@
 
     });
 
-   
+
     /*----------------------------------------------------*/
     /*  fonction de preparation des popup de forme
         /*----------------------------------------------------*/
@@ -215,7 +246,7 @@
     $(document).on('click', '.plus', function () {
         $('#count').val(parseFloat($('#count').val()) + 0.25);
         $('.moins').css("cursor", "pointer").css("opacity", "1")
-       
+
     });
     $(document).on('click', '.moins', function () {
         if (parseFloat($('#count').val()) == 0.25) {
@@ -242,38 +273,59 @@
             }
         }
     });
+    /***************************** modification interval *********************** */
+    $(document).on('click', '.btn-plus-interval_modif', function () {
+        $('.count_modif').val(parseInt($('.count_modif').val()) + 1);
+        $('.btn-minus-interval_modif').css("cursor", "pointer").css("opacity", "1")
+    });
+    $(document).on('click', '.btn-minus-interval_modif', function () {
+        if (parseInt($('.count_modif').val()) == 2) {
+            $('.btn-minus-interval_modif').css("cursor", "default").css("opacity", ".3")
+        } else {
+            $('.count_modif').val(parseInt($('.count_modif').val()) - 1);
+            if (parseInt($('.count_modif').val()) == 2) {
+                $('.btn-minus-interval_modif').css("cursor", "default").css("opacity", ".3")
+            }
+        }
+    });
     /*----------------------------------------------------*/
-        /*  debut a ajouter chez abdo
-            /*----------------------------------------------------*/
+    /*  debut a ajouter chez abdo
+        /*----------------------------------------------------*/
 
-            $('input').on('change', function() {
-                if($('.rappelTime').is(':checked')){
-                    $('.lesRappel').html($(this).attr('value'));
-                    $('.inputeureRappel').attr("value",$(this).attr('value'));
-                }
-            });
-            $('.one-choice.rappelControll input[type=checkbox]').on('change', function() {
-                $('.one-choice.rappelControll input[type=checkbox]').not(this).prop('checked', false);  
-                });
-                $('.VMbtn').click(function(e){
-                    $('.VR').css('display','block');
-                    $('.VM').css('display','none');
-                });
-                $('input[type=checkbox].ajouterMedecin').on('change', function() {    
-                    $('.VR').css('display','none');
-                    $('.VM').css('display','block');
-                });
-            
-            /*----------------------------------------------------*/
-                    /*  debut a ajouter chez abdo
-                        /*----------------------------------------------------*/
-            
+    $('input').on('change', function () {
+        if ($('.rappelTime').is(':checked')) {
+            $('.lesRappel').html($(this).attr('value'));
+            $('.inputeureRappel').attr("value", $(this).attr('value'));
+        }
+        // modifier verssion final : ajouter la condition else
+        else {
+            $('.lesRappel').html("aucun autre rappel");
+            $('.inputeureRappel').attr("value", "");
+        }
 
-            
-            
-            
+    });
+    $('.one-choice.rappelControll input[type=checkbox]').on('change', function () {
+        $('.one-choice.rappelControll input[type=checkbox]').not(this).prop('checked', false);
+    });
+    $('.VMbtn').click(function (e) {
+        $('.VR').css('display', 'block');
+        $('.VM').css('display', 'none');
+    });
+    $('input[type=checkbox].ajouterMedecin').on('change', function () {
+        $('.VR').css('display', 'none');
+        $('.VM').css('display', 'block');
+    });
+
+    /*----------------------------------------------------*/
+    /*  debut a ajouter chez abdo
+        /*----------------------------------------------------*/
+
+
+
+
+
     $(document).ready(function () {
-        $('a.appelRapelReminder').magnificPopup({  //  a ajouter chez abdo
+        $('a.appelRapelReminder').magnificPopup({ //  a ajouter chez abdo
             type: 'inline',
             removalDelay: 300,
             focus: '#name',
@@ -290,17 +342,17 @@
             },
             midClick: true
         });
-        
+
         $(document).on('click', '.popup-rapelCont-enreg', function (e) { //  a ajouter chez abdo
             e.preventDefault();
-          
+
             $.magnificPopup.close();
         });
         $(document).on('click', '.popup-rapelCont-annuler', function (e) { //  a ajouter chez abdo
             e.preventDefault();
             $('.lesRappel').html("aucun autre rappel");
-              $('.rappelControll input[type=checkbox]').prop('checked', false);  
-            
+            $('.rappelControll input[type=checkbox]').prop('checked', false);
+
             $.magnificPopup.close();
         }); // fin a ajouter chez abdo
 
@@ -333,14 +385,13 @@
             $('#typeJour').attr('value', 'specifique');
             $('#anId1').removeAttr("disabled");
             // checked inputs
-            $('.days').each(function(){
-                if($(this).is(':checked')){
-                    $(this).val('yes');                    
+            $('.days').each(function () {
+                if ($(this).is(':checked')) {
+                    $(this).val('yes');
+                } else {
+                    $(this).val('no');
                 }
-                else{
-                    $(this).val('no'); 
-                }
-                
+
             })
             $.magnificPopup.close();
         });
@@ -407,7 +458,7 @@
             },
             midClick: true
         });
-                $(document).on('click', '.popup-duree-enregi', function (e) {
+        $(document).on('click', '.popup-duree-enregi', function (e) {
             e.preventDefault();
             $('.one-choice.duree input[type=checkbox]').prop('checked', false); // détchequer les autre input                
             $('#permanant').removeAttr("disabled");
@@ -423,7 +474,7 @@
         });
 
 
-  /*----------------------------------------------------*/
+        /*----------------------------------------------------*/
         /*  popup selection dose specifier a chaque prises
             /*----------------------------------------------------*/
 
@@ -455,7 +506,7 @@
             $.magnificPopup.close();
         });
 
-  /*----------------------------------------------------*/
+        /*----------------------------------------------------*/
         /*  popup selection medecin 
             /*----------------------------------------------------*/
 
@@ -486,8 +537,98 @@
             e.preventDefault();
             $.magnificPopup.close();
         });
+        // modifier verssion final : ajouter la l'appel de popup
+
+        $('.appelMedic').magnificPopup({
+            type: 'inline',
+            removalDelay: 300,
+            focus: '#name',
+            modal: true,
+            // When elemened is focused, some mobile browsers in some cases zoom in
+            // It looks not nice, so we disable it:
+            callbacks: {
+                beforeClose: function () {
+                    this.content.addClass('zoomOut');
+                },
+                close: function () {
+                    this.content.removeClass('zoomOut');
+                }
+            },
+            midClick: true
+        });
+    });
+    $(".colorSelected").css("color", "#00F260");
+    $(document).on('click', '.frquence', function () {
+        $(".dureeDetail").css("display", "none");
+        $(".joursDetail").css("display", "none");
+        $(".frequenceDetail").css("display", "block");
+        $(".frequenceDetail").addClass("animated fadeInUp");
+        $(".border1").css("color", "#00F260");
+        $(".border2").css("color", "#fff");
+        $(".border3").css("color", "#fff");
+        $(".frequenceModification").css("display", "none");
+        $(".afichageFreq").css("display", "block");
+        $(".afichageFreq").addClass("animated fadeIn");
+    });
+    $(document).on('click', '.duree', function () {
+        $(".frequenceDetail").css("display", "none");
+        $(".joursDetail").css("display", "none");
+        $(".dureeDetail").css("display", "block");
+        $(".dureeDetail").addClass("animated fadeIn");
+        $(".border1").css("color", "#fff");
+        $(".border2").css("color", "#00F260");
+        $(".border3").css("color", "#fff");
+        $(".dureeModification").css("display", "none");
+        $(".afichageDuree").css("display", "block");
+        $(".afichageDuree").addClass("animated fadeIn");
 
     });
+    $(document).on('click', '.joursSelect', function () {
+        $(".dureeDetail").css("display", "none");
+        $(".frequenceDetail").css("display", "none");
+        $(".joursDetail").css("display", "block");
+        $(".joursDetail").addClass("animated fadeIn");
+        $(".border1").css("color", "#fff");
+        $(".border2").css("color", "#fff");
+        $(".border3").css("color", "#00F260");
+
+    });
+    $(".modifierFreq").click(function () {
+        $(".modifierFreq").css("display", "none");
+        $(".frequenceModification").css("display", "block");
+        $(".frequenceModification").addClass("animated fadeIn");
+        $(".afichageFreq").css("display", "none");
+    })
+    $(".modifierDuree").click(function () {
+        $(".modifierDuree").css("display", "none");
+        $(".dureeModification").css("display", "block");
+        $(".dureeModification").addClass("animated fadeIn");
+        $(".afichageDuree").css("display", "none");
+    })
+    $(".modifierJour").click(function () {
+        $(".modifierJour").css("display", "none");
+        $(".JoursModificat").css("display", "block");
+        $(".JoursModificat").addClass("animated fadeIn");
+        $(".afichageJours").css("display", "none");
+    })
+    $(".intervalShow").click(function () {
+        $('.changeJours').css("display", "none");
+        $('.intervalChange').css("display", "block");
+        $(".intervalChange").addClass("animated fadeIn");
+        $('#interval_seleted_modif').prop('checked', true);
+
+    })
+    $(".specifierShow").click(function () {
+        $('.changeJours').css("display", "block");
+        $('.intervalChange').css("display", "none");
+        $('#specifier_seleted_modif').prop('checked', true);
+        $('#specifier_seleted_modif').prop('checked', true);
+
+    })
+    $(".quotidienShow").click(function () {
+        $('.changeJours').css("display", "none");
+        $('.intervalChange').css("display", "none");
+    })
 
 
 

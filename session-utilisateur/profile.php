@@ -1,6 +1,10 @@
 <?php
 include("verificationLogin.php");
-
+require("connect.php");
+$users = $bdd->prepare("SELECT * FROM users 
+		WHERE id=:id_this_user");
+$users->execute(array('id_this_user' =>$id_user));
+$this_user = $users->fetch(PDO::FETCH_ASSOC);
 ?>
 <!doctype html>
 <html lang="en">
@@ -66,13 +70,13 @@ include("verificationLogin.php");
 								<!-- Card global popup -->
 								
 											<!-- Form -->
-										<form class="" action="requetteAjoutMedic.php" method="POST">
+										<form class="" action="modifierProfile.php" method="POST" enctype="multipart/form-data">
 										
 											
-											</div>
+											<!-- </div>
 												
-												</div>
-												<div style="width:100%;border-radius:20px;display:block" class=" white-popup-block d-flex justify-content-center animated zoomIn one" id="specifier">
+												</div> -->
+												<div style="width:100%;border-radius:20px" class="d-flex justify-content-center animated zoomIn one">
 												
 												<div style=" max-width:470px; background:#fff;border-radius:20px">
 
@@ -80,8 +84,12 @@ include("verificationLogin.php");
 
                                                     <div style=" padding-bottom: 0;padding-top: 0;" class=" card-header header">
                                                             <div class="Photo">
-															<img style="border-radius:50%;margin-left:32%;margin-top:2%;" class="main-img img-circle wow bounceIn animated"  src="img/me.jpg" width="35%" alt="">
-                                                            <a class=" modifierPhoto" href="">Modifier la photo</a>
+															<img style="border-radius:50%;margin-left:32%;margin-top:2%;" class="main-img img-circle wow bounceIn animated"  src="img/utilisateurs/<?php echo $this_user['photo_utilisateur']; ?>" width="35%" alt="">
+															<div class="d-flex flex-column" style="">
+																<label for="photo" style="cursor: pointer; width:100%;" class="modifierPhoto" >Modifier la photo</label>
+																<input type="file" id="photo" style="visibility: hidden;" class="form-control inputPhoto" name="photo" size=100 />
+															</div>
+                                                            <!-- <a class=" modifierPhoto" href="">Modifier la photo</a> -->
                                                             </div>
                                                         </div>
 													<div class="card-body box-shodw coordonne" id="coordonne">
@@ -90,32 +98,34 @@ include("verificationLogin.php");
                                             <div style="" class="card-body">
                                             <div class="form-group ">
 															<div class="search-form medecin ">
-															<img  src="img/User.svg" width="8%" alt="">
-															<input  placeholder="Prenom" class="typeText search Margin pic" type="text" name="PrenomProf" value="Ahmed"  required>
+																<img  src="img/User.svg" width="8%" alt="">
+																<input  placeholder="Prenom" class="typeText search Margin pic" type="text" name="PrenomUtilisateur" value="<?php echo $this_user['prenom']; ?>"  required>
 															</div>
 															<div class="search-form medecin ">
-                                                            <img  src="img/User.svg" width="8%" alt="">
-															<input  placeholder="Nom" class="typeText search Margin pic" type="text" name="NomProf" value="KHACHIA ERRAHMAN" required>
+																<img  src="img/User.svg" width="8%" alt="">
+																<input  placeholder="Nom" class="typeText search Margin pic" type="text" name="NomUtilisateur" value="<?php echo $this_user['nom']; ?>" required>
                                                             </div>
                                                             <div class="search-form medecin ">
-															<img  src="img/email.svg" width="7%" alt="">
-															<input  placeholder="Email" class="typeText search Margin pic" type="email" name="EmailProf" value="Ahmedkhachia17@gmail.com"  required>
+																<img  src="img/email.svg" width="7%" alt="">
+																<input  placeholder="Email" class="typeText search Margin pic" type="email" name="EmailUtilisateur" value="<?php echo $this_user['email']; ?>"  required>
 															</div>
 															<div class="search-form medecin ">
-															<img  src="img/phone1.svg" width="7%" alt="">
-															<input  placeholder="Numéro de téléphone" class="typeText search Margin pic" type="text" name="NumProf" value="0671445870"  required>
+																<img  src="img/phone1.svg" width="7%" alt="">
+																<input  placeholder="Numéro de téléphone" class="typeText search Margin pic" type="text" name="NumUtilisateur" value="<?php echo $this_user['phone']; ?>"  required>
 															</div>
 															<div class="search-form medecin ">
-															<img  src="img/sexe.svg" width="7%" alt="">
-															<input  placeholder="Sexe" class="typeText search Margin pic" type="text" name="SexeProf" value="Masculin" required>
+																<img  src="img/sexe.svg" width="7%" alt="">
+																<input  placeholder="Sexe" class="typeText search Margin pic" type="text" name="SexeUtilisateur" value="<?php echo $this_user['sex']; ?>" required>
                                                             </div>
                                                             <div class="search-form medecin ">
-															<img  src="img/Age.svg" width="10%" alt="">
-															<input  placeholder="Age" class="typeText search Margin pic" type="text" name="AgeProf" value="22" required>
+																<img  src="img/Age.svg" width="10%" alt="">
+																<input  placeholder="Age" class="typeText search Margin pic" type="text" name="AgeUtilisateur" value="<?php echo $this_user['age']; ?>" required>
 															</div>
+															<input  style="display:none" class="typeText search Margin pic" type="text" name="IdUtilisateur" value="<?php echo $this_user['id']; ?>" required>
+
                                                         </div>
                                                         <div class="d-flex justify-content-center mt-5">
-																<button class="primary-btn contact100-form-btn" type="submit" name="submit">Enregistrer</button>
+																<button class="primary-btn contact100-form-btn" type="submit" name="modificationUtilisateur">Enregistrer</button>
 												</div>
                                                     </div> 
                                                     

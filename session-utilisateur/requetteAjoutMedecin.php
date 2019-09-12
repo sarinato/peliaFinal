@@ -53,9 +53,13 @@
                     'email' => $email,
                     'adresse' => $adresse
             ))){
+                // $last_id_medecin = $bdd->lastInsertedId();
+
                 $dataResult["success"] = 1;
+                $dataResult["nomMedecin"] = $nom_medecin;
+                // $dataResult["idMedecin"] = $last_id_medecin;
             }else{
-                echo "khawartiha";
+                echo "none";
             }
     
         }

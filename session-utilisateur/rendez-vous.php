@@ -12,7 +12,7 @@ $medecin = $medecins->fetchAll(PDO::FETCH_ASSOC);
     <html lang="en">
 
     <head>
-        <!-- Required meta tags -->
+        <!--  meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="icon" href="img/favicon.png" type="image/png">
@@ -21,6 +21,7 @@ $medecin = $medecins->fetchAll(PDO::FETCH_ASSOC);
 	include "link.php";
 	?>
             <link rel="stylesheet" href="css/json.css">
+            <link rel="stylesheet" href="css/medecin.css">
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     </head>
 
@@ -70,24 +71,26 @@ $medecin = $medecins->fetchAll(PDO::FETCH_ASSOC);
                                             <!-- Card global popup -->
 
                                             <!-- Form -->
-                                            <form class="" action="requetteAjoutRendez.php" method="POST">
+                                            <form action="requetteAjoutRendez.php" method="POST" id="theForm">
                                                 <div class="d-flex justify-content-around flex-wrap simple-information">
                                                     <div class="col-md-8">
                                                         <div class="card">
                                                             <div class="card-body VR">
-                                                                <h5 class="card-title ">Ajouter un rendez-vous</h5>
+                                                                <h5 class="card-title" id="checkbox-medecin">Ajouter un rendez-vous</h5>
 
                                                                 <div class="form-group">
-                                                                    <div class="search-form medecin ">
-                                                                        <input placeholder="Nom du rendez-vous" class="typeText search Margin pic" type="text" name="nomRend" required>
+                                                                    <div class="search-form medecin validate-input" data-validate="error" id="nomRend">
+                                                                        <input  placeholder="Nom du rendez-vous" class="typeText search Margin pic input100" type="text" name="nomRend"  >
                                                                     </div>
                                                                     
-                                                                    <div class="form-group col-md-12 selectt ">
+                                                                    <div class="form-group col-md-12 selectt validate-input" data-validate="error">
                                                                         
-                                                                             <div id="app-cover">
+                                                                             <div id="app-cover" class="ChoixPadd">
                                                                                 <div id="select-box">
-                                                                                    <input type="checkbox" class="frequenceInput" id="options-view-button" value="0">
+                                                                                    <input  type="checkbox" class="frequenceInput input100" id="options-view-button" value="0">
                                                                                     <div id="select-button" class="brd">
+                                                                                    
+                                                                                        <input type="text" style="display:none" id="MedecinSelect">
                                                                                         <div id="selected-value">
                                                                                             <span>Choisissez un medecin</span>
                                                                                         </div>
@@ -98,31 +101,35 @@ $medecin = $medecins->fetchAll(PDO::FETCH_ASSOC);
                                                                                     </div>
                                                                                     <div id="options">
                                                                                         <div class="option">
-                                                                                            <input class="s-c top" type="checkbox" name="medecinSelected" value="1">
-                                                                                            <input class="s-c bottom frequenceInput" type="checkbox" name="medecinSelected" value="1">
-                                                                                            <span class="label">Aucun médecin</span>
-                                                                                            <span class="opt-val">Aucun médecin</span>
+                                                                                            <input  class="s-c top  SelectMed" type="checkbox" name="medecinSelected" id="" value="1">
+                                                                                            <input  class="s-c bottom frequenceInput  SelectMed" type="checkbox" name="medecinSelected" value="1">
+                                                                                            <span class="label" >Aucun médecin</span>
+                                                                                            <span class="opt-val" >Aucun médecin</span>
                                                                                         </div>
+                                                                                        <div class="refreshContainer">
+                                                                                        <div class="refreshMe">
                                                                                         <?php
 
                     $i=1;
                     foreach( $medecin as $key ) { $i++;
                         ?>
-                                                                                        <div class="option">
-                                                                                            <input class="s-c top" type="checkbox" name="medecinSelected" value="2">
-                                                                                            <input class="s-c bottom frequenceInput" type="checkbox"  name="medecinSelected" value="<?php echo $key['id_medecin']; ?>">
-                                                                                            <span class="label"><?php echo $key['nom_medecin']; ?></span>
-                                                                                            <span class="opt-val"><?php echo $key['nom_medecin']; ?></span>
+                                                                                        <div class="option ">
+                                                                                            <input  class="s-c top   SelectMed medecin-ajouter" type="checkbox" name="medecinSelected" value="2">
+                                                       <!-- the input with Medecin id-->    <input  class="s-c bottom  frequenceInput  SelectMed medecin-ajouter" type="checkbox"  name="medecinSelected" value="<?php echo $key['id_medecin']; ?>">
+                                                                                            <span class="label "><?php echo $key['nom_medecin']; ?></span>
+                                                                                            <span class="opt-val "><?php echo $key['nom_medecin']; ?></span>
                                                                                         </div>
                     <?php
                     }
                     ?>
+                                                                                        </div>
+                                                                                        </div>
                                                                                     
                                                                                         <div class="option">
-                                                                                            <input class="s-c top " type="checkbox" name="medecinSelected" value="3">
-                                                                                            <input class="s-c bottom frequenceInput ajouterMedecin" type="checkbox" name="medecinSelected" value="3">
-                                                                                            <span class="label">Ajouter un medecin</span>
-                                                                                            <span class="opt-val">Ajouter un medecin</span>
+                                                                                            <input  class="s-c top  SelectMed" type="checkbox" name="medecinSelected" value="3">
+                                                                                            <input  class="s-c bottom frequenceInput ajouterMedecin  SelectMed" type="checkbox" name="medecinSelected" value="3">
+                                                                                            <span class="label" id="MedecinAjoute1">Ajouter un medecin</span>
+                                                                                            <span class="opt-val" id="MedecinAjoute2">Ajouter un medecin</span>
                                                                                         </div>
                                                                                         
                                                                                         <div id="option-bg"></div>
@@ -134,39 +141,39 @@ $medecin = $medecins->fetchAll(PDO::FETCH_ASSOC);
                                                                         </div>
 
                                                                     </div>
-                                                                    <div class="search-form medecin">
 
-                                                                        <div class="input-group dateRendez">
+                                                                    <div class="search-form medecin rendez-vousPadding">
+                                                                        <div class="input-group dateRendez validate-input" data-validate="error" id="dateRendez">
                                                                             <img src="img/rendez.svg" width="7%" alt="">
                                                                             <!-- <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i> -->
-                                                                            <input class="input--style-2 js-datepicker " type="text" placeholder="Date de Rendez-vous" name="dateRendez">
-
+                                                                            <input  class="input--style-2 js-datepicker input100" type="text" placeholder="Date de Rendez-vous" name="dateRendez">
                                                                         </div>
                                                                     </div>
-                                                                    <div class="search-form medecin">
+                                                                    
+                                                                    <div  class="search-form medecin rendez-vousPadding ">
                                                                         <img src="img/time.svg" width="7%" alt="">
-                                                                        <div class="form-group unique" id="timeRendez">
-                                                                            <input type="text" name="timeRendez" data-toggle="timepicker" class="form-input" autocomplete="off" placeholder="12:00">
+                                                                        <div class="form-group unique validate-input " data-validate="error" >
+                                                                            <input id="timeRendez" type="text" name="timeRendez" data-toggle="timepicker" class="form-input input100" autocomplete="off"  value="12:00" >
                                                                         </div>
                                                                     </div>
 
-                                                                    <div class="search-form medecin ">
-                                                                    <span >Vous serez rappelez la nuitiez du rendez-vous par votre controle à 21 heures</label><br>
+                                                                    <div class="search-form medecin rendez-vousPadding validate-input" data-validate="error" id="heureRappel">
+                                                                    <span >Vous serez rappelez la nuitiez du rendez-vous par votre controle à 21 heures</label><br><br>
                                                                         <img src="img/alarm.svg" width="7%" alt="">
                                                                         
                                                                         <a class="appelRapelReminder reminder" href="#rappel"><span class="Margin pic lesRappel">ajouter d'autres rappel</span></a>
-                                                                        <input type="text" style="display:none" name="heureRappel" class="inputeureRappel" value="">
+                                                                        <input    type="text" style="display:none" name="heureRappel" class="inputeureRappel input100" value="">
 
                                                                     </div>
 
-                                                                    <div class="search-form medecin ">
+                                                                    <div class="search-form medecin rendez-vousPadding validate-input" data-validate="error" id="LocMed">
                                                                         <img src="img/adresse.svg" width="7%" alt="">
-                                                                        <input placeholder="Ajouter un emplacement" class="typeText search Margin pic" type="text" name="LocMed" required>
+                                                                        <input  placeholder="Ajouter un emplacement" class="typeText search Margin pic input100" type="text" name="LocMed" >
                                                                     </div>
 
-                                                                    <div class="search-form medecin ">
+                                                                    <div class="search-form medecin rendez-vousPadding validate-input" data-validate="error" id="RemarqueMed">
                                                                         <img src="img/remarque.svg" width="7%" alt="">
-                                                                        <input placeholder="Ajouter des remarques" class="typeText search Margin pic" type="text" name="RemarqueMed" required>
+                                                                        <input  placeholder="Ajouter des remarques" class="typeText search Margin pic input100" type="text" name="RemarqueMed" >
                                                                     </div>
                                                                 </div>
 
@@ -183,24 +190,24 @@ $medecin = $medecins->fetchAll(PDO::FETCH_ASSOC);
 														<div class="card-header">
                                                         Ajouter d'autres rappel
 														</div>
-														<div class="card-body box-shodw">
+														<div class="card-body box-shodw ">
 														<label class="Titre-jours" >Vouliez vous ajouter d'autres rappel</label><br>
 
-															<div class="form-group checkbox one-choice rappelControll" >
+                                                            <div class="form-group checkbox one-choice rappelControll" >
 
-																<input type="checkbox" class="rappelTime" name="heureRappel" id="jr2" value="30 minutes avant"/>
+																<input  type="checkbox" class="rappelTime input100" name="heureRappel" id="jr2" value="30 minutes avant"/>
 																<label for="jr2" class="jrs"><span class="chk-span" > </span>30 minutes avant</label>
 
-																<input type="checkbox" class="rappelTime" name="heureRappel" id="jr3" value="1 heure avant"/>
-																<label for="jr3" class="jrs"><span class="chk-span" > </span>1 heure avant</label>
+																<input  type="checkbox" class="rappelTime input100" name="heureRappel" id="jr3" value="1 heure avant"/>
+																<label for="jr3" class="jrs"><span class="chk-span " > </span>1 heure avant</label>
 																
-																<input type="checkbox" id="jr4" class="rappelTime" name="heureRappel" value="2 heure avant"/>
-																<label  for="jr4" class="jrs"><span class="chk-span" ></span>2 heure avant</label>
+																<input  type="checkbox" id="jr4" class="rappelTime input100" name="heureRappel" value="2 heure avant"/>
+																<label  for="jr4" class="jrs"><span class="chk-span " ></span>2 heure avant</label>
 																									
-																<input type="checkbox" class="rappelTime" name="heureRappel" id="jr5" value="3 heure avant"/>
+																<input  type="checkbox" class="rappelTime input100" name="heureRappel" id="jr5" value="3 heure avant"/>
 																<label for="jr5" class="jrs"><span class="chk-span" > </span>3 heure avant</label>
 
-																<input type="checkbox" class="rappelTime" name="heureRappel" id="jr6" value="4 heure avant"/>
+																<input  type="checkbox" class="rappelTime input100" name="heureRappel" id="jr6" value="4 heure avant"/>
 																<label for="jr6" class="jrs"><span class="chk-span" > </span>4 heure avant</label>
 
 															</div>
@@ -212,9 +219,89 @@ $medecin = $medecins->fetchAll(PDO::FETCH_ASSOC);
 													</div>
 												</div>
                                                 <div class="d-flex justify-content-center mt-5">
-                                                    <button class="primary-btn contact100-form-btn" type="submit" name="ajoutControle">Ajouter</button>
+                                                    <button class="primary-btn contact100-form-btn" type="submit" name="ajoutControle" id="submitRend">Ajouter</button>
                                                 </div>
                                             </form>
+                                            
+                    <!-- The ajax for The Oppointements form -->
+                    <script type="text/javascript">
+					$(document).ready(function() {
+
+						$('#submitRend').click(function(e){
+						e.preventDefault();						
+							var form = $("#theForm")[0];
+							var formdata = new FormData(form)
+							$.ajax({
+								type:'POST',
+								//method:'post',
+								url: "./requetteAjoutRendez.php",
+								cache:false,
+								data: formdata,
+								dataType: "json",
+								processData: false,
+								contentType: false,
+								success:function (data){
+
+									if(data.nom_conntroles==1){
+										$('#nomRend').addClass("alert-validate");
+										$('#nomRend').removeClass("true-validate");
+                                    }
+                                    else{
+                                        $('#nomRend').removeClass("alert-validate");
+										$('#nomRend').addClass("true-validate");
+                                    }
+                                    if(data.date_conntroles==1){
+										$('#dateRendez').addClass("alert-validate");
+										$('#dateRendez').removeClass("true-validate");
+                                    }
+                                    else{
+                                        $('#dateRendez').removeClass("alert-validate");
+										$('#dateRendez').addClass("true-validate");
+                                    }
+                                    if(data.heure_conntroles==1){
+                                        $('#timeRendez').addClass("alert-validate");
+										$('#timeRendez').removeClass("true-validate");
+                                    }
+                                    else{
+                                        $('#timeRendez').removeClass("alert-validate");
+										$('#timeRendez').addClass("true-validate");
+                                    }
+                                    if(data.rappel_conntroles==1){
+										$('#heureRappel').addClass("alert-validate");
+										$('#heureRappel').removeClass("true-validate");
+                                    }
+                                    else{
+                                        $('#heureRappel').removeClass("alert-validate");
+										$('#heureRappel').addClass("true-validate");
+                                    }
+                                    if(data.emplacement==1){
+										$('#LocMed').addClass("alert-validate");
+										$('#LocMed').removeClass("true-validate");
+                                    }
+                                    else{
+                                        $('#LocMed').removeClass("alert-validate");
+										$('#LocMed').addClass("true-validate");
+                                    }
+                                    if(data.remarque==1){
+										$('#RemarqueMed').addClass("alert-validate");
+										$('#RemarqueMed').removeClass("true-validate");
+                                    }
+                                    else{
+                                        $('#RemarqueMed').removeClass("alert-validate");
+										$('#RemarqueMed').addClass("true-validate");
+                                    }
+                                    if(data.success == "1"){
+                                        window.location.href = "./ListeRendez-vousNot.php";
+                                    }                                    
+                                    
+								}
+								});									
+						});
+					});
+                </script>
+                
+                
+
                                         </div>
 
                                     </div>
@@ -222,7 +309,7 @@ $medecin = $medecins->fetchAll(PDO::FETCH_ASSOC);
                                             <!-- Card global popup -->
 
                                             <!-- Form -->
-                                            <form class="" action="requetteAjoutMedic.php" method="POST">
+                                            <form id="MedForm" action="requetteAjoutMedecin.php" method="POST">
                                                 <div class="d-flex justify-content-around flex-wrap simple-information">
                                                     <div class="col-md-8">
                                                         <div class="card">
@@ -230,26 +317,26 @@ $medecin = $medecins->fetchAll(PDO::FETCH_ASSOC);
                                                                 <h5 class="card-title ">Ajouter un médecin</h5>
 
                                                                 <div class="form-group ">
-                                                                    <div class="search-form medecin ">
+                                                                    <div class="search-form medecin validate-input" data-validate="error">
                                                                         <img src="img/doctor.svg" width="12%" alt="">
-                                                                        <input placeholder="Nom du médecin" class="typeText search Margin pic" type="text" name="nomMed" required>
+                                                                        <input  placeholder="Nom du médecin" class="typeText search Margin pic input100" type="text" id="nomMed" name="nomMed" >
                                                                     </div>
-                                                                    <div class="search-form medecin ">
-                                                                        <input placeholder="Spécialité" class="typeText search Margin specialite" type="text" name="SpecMed" required>
+                                                                    <div class="search-form medecin validate-input" data-validate="error">
+                                                                        <input  placeholder="Spécialité" class="typeText search Margin specialite input100" type="text" id="SpecMed" name="SpecMed" >
                                                                     </div>
-                                                                    <div class="search-form medecin ">
+                                                                    <div class="search-form medecin validate-input" data-validate="error">
                                                                         <img src="img/phone1.svg" width="7%" alt="">
-                                                                        <input placeholder="Numéro de téléphone" class="typeText search Margin pic" type="text" name="numMed" required>
+                                                                        <input  placeholder="Numéro de téléphone" class="typeText search Margin pic input100" type="text" id="numMed" name="numMed" >
                                                                     </div>
 
-                                                                    <div class="search-form medecin ">
+                                                                    <div class="search-form medecin validate-input" data-validate="error">
                                                                         <img src="img/email.svg" width="7%" alt="">
-                                                                        <input placeholder="Email" class="typeText search Margin pic" type="email" name="emailMed" required>
+                                                                        <input  placeholder="Email" class="typeText search Margin pic input100" type="email" id="emailMed" name="emailMed" >
                                                                     </div>
 
-                                                                    <div class="search-form medecin ">
+                                                                    <div class="search-form medecin validate-input" data-validate="error">
                                                                         <img src="img/adresse.svg" width="7%" alt="">
-                                                                        <input placeholder="Adresse" class="typeText search Margin pic" type="text" name="adresseMed" required>
+                                                                        <input  placeholder="Adresse" class="typeText search Margin pic input100" type="text" id="adresseMed" name="adresseMed" >
                                                                     </div>
                                                                 </div>
 
@@ -260,12 +347,94 @@ $medecin = $medecins->fetchAll(PDO::FETCH_ASSOC);
 
                                                 </div>
                                                 <div class="d-flex justify-content-center mt-5">
-                                                    <button class="primary-btn contact100-form-btn VMbtn" type="submit" name="submit">Ajouter</button>
+                                                    <button class="primary-btn contact100-form-btn VMbtn" type="submit" id="submit" name="submit">Ajouter</button>
                                                 </div>
 
                                         </div>
 
                                     </form>
+                                    <!-- The ajax for the medecine form -->
+                <script type="text/javascript">
+					$(document).ready(function() {
+
+						$('#submit').click(function(e){                            
+						    e.preventDefault();					
+							var form = $("#MedForm")[0];
+							var formdata = new FormData(form)
+							$.ajax({
+								type:'POST',
+								//method:'post',
+								url: "./requetteAjoutMedecin.php",
+								cache:false,
+								data: formdata,
+								dataType: "json",
+								processData: false,
+								contentType: false,
+								success:function (data){
+									if(data.nomMed == "1"){
+										$('#nomMed').addClass("alert-validate");
+										$('#nomMed').removeClass("true-validate");
+									}
+									else{
+										$('#nomMed').removeClass("alert-validate");
+										$('#nomMed').addClass("true-validate");
+                                    }
+                                    
+									if(data.SpecMed == "1"){
+										$('#SpecMed').addClass("alert-validate");
+										$('#SpecMed').removeClass("true-validate");
+									}
+									else{
+										$('#SpecMed').removeClass("alert-validate");
+										$('#SpecMed').addClass("true-validate");
+                                    }
+                                    
+									if(data.numMed == "1"){
+										$('#numMed').addClass("alert-validate");
+										$('#numMed').removeClass("true-validate");
+									}
+									else{
+										$('#numMed').removeClass("alert-validate");
+										$('#numMed').addClass("true-validate");
+                                    }
+                                    
+									if(data.emailMed == "1"){
+										$('#emailMed').addClass("alert-validate");
+										$('#emailMed').removeClass("true-validate");
+									}
+									else{
+										$('#emailMed').removeClass("alert-validate");
+										$('#emailMed').addClass("true-validate");
+                                    }
+                                    
+									if(data.adresseMed == "1"){
+										$('#adresseMed').addClass("alert-validate");
+										$('#adressMed').removeClass("true-validate");
+									}						
+									else{
+										$('#adresseMed').removeClass("alert-validate");
+										$('#adresseMed').addClass("true-validate");
+									}
+                               
+                                                                                      
+									if(data.success==1){
+                                        $(".refreshMe").append("<div class='option '><input  class='s-c top  SelectMed medecin-ajouter' type='checkbox' name='medecinSelected' value='2'><input  class='s-c bottom frequenceInput  SelectMed medecin-ajouter' type='checkbox'  name='medecinSelected' value=''><span class='label'>"+data.nomMedecin+"</span><span class='opt-val'>"+data.nomMedecin+"</span></div>");
+                                        // $(".refreshContainer").load(" .refreshMe");
+                                        $(".medecin-ajouter:last-child").attr("checked",true);
+                                        $(".medecin-ajouter:nth-last-child(2)").attr("checked",true);
+                                        // $(".medecin-ajouter:nth-last-child(2)").attr("checked",true);
+                                        $("#MedecinAjoute1").text(data.nomMedecin);
+                                        $("#MedecinAjoute2").text(data.nomMedecin);
+                                        
+                                        $("#options-view-button").prop('disabled', true); 
+                                        
+                                       
+								    }
+                                }
+							});									
+						});
+					});
+				</script>
 
                                     <!-- END Form -->
 
@@ -308,7 +477,6 @@ $medecin = $medecins->fetchAll(PDO::FETCH_ASSOC);
             <script src="js/bootstrap.min.js"></script>
             <script src="js/stellar.js"></script>
             <script src="js/jquery.magnific-popup.min.js"></script>
-
             <script src="vendors/lightbox/simpleLightbox.min.js"></script>
             <script src="vendors/nice-select/js/jquery.nice-select.min.js"></script>
             <script src="vendors/owl-carousel/owl.carousel.min.js"></script>
@@ -322,6 +490,7 @@ $medecin = $medecins->fetchAll(PDO::FETCH_ASSOC);
             <script src="js/gmaps.min.js"></script>
             <script src="js/theme.js"></script>
             <script src="js/global.js"></script>
+            <script src="medecin.js"></script>
 
             <!-- Jquery JS-->
             <script src="vendors/jquery/jquery.min.js"></script>

@@ -100,34 +100,7 @@ $id_user = $_SESSION['id'];
                 $error = true;            
             }    
         } 
-    
-    // if($nbr == "2"){
-    //     // echo "\n222222222222222222222";
-    //     for($i = 0;$i< 4; $i++){
-    //         if(($doses[$i] == "")){            
-    //             $dataResult['fDay'] = 4;
-    //             $error = true;            
-    //         }    
-    //     } 
-    // }
-    // if($nbr == "3"){
-    //     // echo "\n333333333333333333333";
-    //     for($i = 0;$i< 6; $i++){
-    //         if(($doses[$i] == "")){            
-    //             $dataResult['fDay'] = 4;
-    //             $error = true;            
-    //         }    
-    //     } 
-    // }
-    // if($nbr == "4"){
-    //     // echo "\n444444444444444444";
-    //     for($i = 0;$i< 8; $i++){
-    //         if(($doses[$i] == "")){            
-    //             $dataResult['fDay'] = 4;
-    //             $error = true;            
-    //         }    
-    //     } 
-    // }                                           
+                                            
     if ($error == false){
         $dataResult['sent'] = 1;
         // print_r($_POST);
@@ -139,9 +112,7 @@ $id_user = $_SESSION['id'];
         $id_medic1 = $select_medic->fetch(PDO::FETCH_ASSOC);
         $id_medic = $id_medic1['id_medicament'];
         $id_medecin = 0;
-        $finTraitement = (isset($_POST["limiter_seleted"])) ? $_POST['dureeTraitement'] : 99999;
-
-        $nombre_fois = $_POST['frequenceJourn'];
+        // $finTraitement = (isset($_POST["limiter_seleted"])) ? $_POST['dureeTraitement'] : 99999;
 
         $f1=$_POST['frequenceJ1'];
         $d1=$_POST['doseF1'];
@@ -179,42 +150,43 @@ $id_user = $_SESSION['id'];
             ':medic' =>$id_medic,
             ':id_user'=>$id_user
         ));
-        $select_id_temps = $select_medic_user->fetch(PDO::FETCH_ASSOC);
+        $select_id_temps = $select_medic_user->fetchAll(PDO::FETCH_ASSOC);
         
-       
-        $id_temps = $select_id_temps['id_temps'];
-        $jours_selection = $_POST['jour_selectionne'];
-        $lundi=$mardi=$mercredi=$jeudi=$vendredi=$samedi=$dimanche=0;
+        $select_id_temp1 = end($select_id_temps);
+        $id_temps = $select_id_temp1['id_temps'];
+        $lu=$ma=$me=$je=$ve=$sa=$di=0;
   
-        if($jours_selection == "all" || $jours_selection == "specifique") {
+        if($typeJour == "all" || $typeJour == "specifique") {
             $methode = 0;
-            if($jours_selection == "all"){
-                $lundi=$mardi=$mercredi=$jeudi=$vendredi=$samedi=$dimanche=1;
+            if($typeJour == "specifique"){
+                if($lundi == 'yes'){$lu=1;} 
+                if($mardi == 'yes'){$ma=1;}
+                if($mercredi == 'yes'){$me=1;}
+                if($jeudi == 'yes'){$je=1;}
+                if($vendredi == 'yes'){$ve=1;}
+                if($samedi == 'yes'){$sa=1;}
+                if($dimanche == 'yes'){$di=1;}
+             
             }
             else{
-                $lundi = (isset($_POST["lundi"])) ? 1 : 0;
-                $mardi = (isset($_POST["mardi"])) ?  1 : 0;
-                $mercredi = (isset($_POST["mercredi"])) ?  1 : 0;
-                $jeudi = (isset($_POST["jeudi"])) ?  1 : 0;
-                $vendredi = (isset($_POST["vendredi"])) ? 1 : 0;
-                $samedi = (isset($_POST["samedi"])) ? 1 : 0;
-                $dimanche = (isset($_POST["dimanche"])) ? 1 : 0;
+                $lu=$ma=$me=$je=$ve=$sa=$di=1;
             }
             $requete_jours = $bdd->prepare("INSERT INTO jours_prises(`id_temps`, `methode`,`Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`,`Saturday`,`Sunday`) 
             VALUES(:id_temps, :methode,:lundi, :mardi, :mercredi, :jeudi, :vendredi,:samedi,:dimanche)");
             $requete_jours->execute(array(
                 'id_temps' => $id_temps,
                 'methode' => $methode,
-                'lundi' => $lundi,
-                'mardi' => $mardi,
-                'mercredi' => $mercredi,
-                'jeudi' => $jeudi,
-                'vendredi' => $vendredi,
-                'samedi'=>$samedi,
-                'dimanche'=>$dimanche
+                'lundi' => $lu,
+                'mardi' => $ma,
+                'mercredi' => $me,
+                'jeudi' => $je,
+                'vendredi' => $ve,
+                'samedi'=>$sa,
+                'dimanche'=>$di
             ));
         }
         elseif($jours_selection == "interval")  {
+            
             $methode = 1;
             $interval = $_POST['interval_prise'];
             $date_debut = $_POST['dateDebut'];

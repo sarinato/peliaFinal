@@ -155,7 +155,7 @@ if(isset($_SESSION['peliaSafetyConnection']) && $_SESSION['peliaSafetyConnection
 				  					}, 4000);
 								$('.password').addClass('true-validate');
 								$('.password').removeClass('alert-validate');								
-								window.location.href = "../session-utilisateur/index.php"
+								window.location.href = "../session-utilisateur/profil.php"
 							  }							  
 
 
